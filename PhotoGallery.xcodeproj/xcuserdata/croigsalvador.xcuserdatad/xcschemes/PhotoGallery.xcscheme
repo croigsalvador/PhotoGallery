@@ -5,6 +5,22 @@
    <BuildAction
       parallelizeBuildables = "YES"
       buildImplicitDependencies = "YES">
+      <BuildActionEntries>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "0F47B01A1DE6191000D452D7"
+               BuildableName = "PhotoGallery.app"
+               BlueprintName = "PhotoGallery"
+               ReferencedContainer = "container:PhotoGallery.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+      </BuildActionEntries>
    </BuildAction>
    <TestAction
       buildConfiguration = "Debug"
@@ -12,7 +28,36 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "0F47B02E1DE6191000D452D7"
+               BuildableName = "PhotoGalleryTests.xctest"
+               BlueprintName = "PhotoGalleryTests"
+               ReferencedContainer = "container:PhotoGallery.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "0F47B0391DE6191000D452D7"
+               BuildableName = "PhotoGalleryUITests.xctest"
+               BlueprintName = "PhotoGalleryUITests"
+               ReferencedContainer = "container:PhotoGallery.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "0F47B01A1DE6191000D452D7"
+            BuildableName = "PhotoGallery.app"
+            BlueprintName = "PhotoGallery"
+            ReferencedContainer = "container:PhotoGallery.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </TestAction>
@@ -26,6 +71,16 @@
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES">
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "0F47B01A1DE6191000D452D7"
+            BuildableName = "PhotoGallery.app"
+            BlueprintName = "PhotoGallery"
+            ReferencedContainer = "container:PhotoGallery.xcodeproj">
+         </BuildableReference>
+      </BuildableProductRunnable>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>
@@ -35,6 +90,16 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "0F47B01A1DE6191000D452D7"
+            BuildableName = "PhotoGallery.app"
+            BlueprintName = "PhotoGallery"
+            ReferencedContainer = "container:PhotoGallery.xcodeproj">
+         </BuildableReference>
+      </BuildableProductRunnable>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">
