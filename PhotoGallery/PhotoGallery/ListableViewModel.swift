@@ -12,10 +12,9 @@ import UIKit
 protocol ListableViewModel {
     func numberOfItems(_ section : Int) -> Int
     func cellViewModel(_ indexPath : IndexPath) -> ListableCellViewModel
-    func customLayout() -> UICollectionViewFlowLayout
 }
 
 protocol ListableCellViewModel {
-    func image(_ completion:(UIImage) -> Void)
+    func image(completion:(_ image: UIImage) -> Void)
     func size() -> CGSize
 }

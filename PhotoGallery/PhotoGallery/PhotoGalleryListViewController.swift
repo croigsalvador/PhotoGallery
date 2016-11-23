@@ -30,16 +30,26 @@ class PhotoGalleryListViewController: UIViewController {
     
     private func setupCollectionView() {
         self.collectionView.dataSource = self
+        self.collectionView.delegate = self
+        self.collectionView.register(PhotoCollectionViewCell.self)
     }
 }
 
 extension PhotoGalleryListViewController : UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+         let cell: PhotoCollectionViewCell = collectionView.dequeueReusableCell(forIndexPath: indexPath)
+         let cellViewModel = self.viewModel.cellViewModel(indexPath)
+         cell.configureCell(cellViewModel)
         
+        return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return self.viewModel.numberOfItems(section)
     }
+}
+
+extension PhotoGalleryListViewController : UICollectionViewDelegate {
+    
 }
