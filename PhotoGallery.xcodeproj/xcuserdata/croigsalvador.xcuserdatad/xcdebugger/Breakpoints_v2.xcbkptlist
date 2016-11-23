@@ -33,5 +33,68 @@
             endingLineNumber = "22">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PhotoGallery/PhotoGallery/PhotoGalleryListViewModel.swift"
+            timestampString = "501633929.143927"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "11"
+            endingLineNumber = "11"
+            landmarkName = "PhotoGalleryListViewModel"
+            landmarkType = "3">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "PhotoGallery.PhotoGalleryListViewModel.__deallocating_deinit"
+                  moduleName = "PhotoGallery"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/croigsalvador/iOS/Swift/PhotoGallery/PhotoGallery/PhotoGallery/PhotoGalleryListViewModel.swift"
+                  timestampString = "501634467.351445"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "4">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "PhotoGallery.PhotoGalleryListViewModel.deinit"
+                  moduleName = "PhotoGallery"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/croigsalvador/iOS/Swift/PhotoGallery/PhotoGallery/PhotoGallery/PhotoGalleryListViewModel.swift"
+                  timestampString = "501634467.355094"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "4">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "PhotoGallery.PhotoGalleryListViewModel.__allocating_init () -&gt; PhotoGallery.PhotoGalleryListViewModel"
+                  moduleName = "PhotoGallery"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/croigsalvador/iOS/Swift/PhotoGallery/PhotoGallery/PhotoGallery/PhotoGalleryListViewModel.swift"
+                  timestampString = "501634467.366152"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "4">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>

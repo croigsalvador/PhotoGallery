@@ -12,6 +12,7 @@ import UIKit
 protocol ListableViewModel {
     func numberOfItems(_ section : Int) -> Int
     func cellViewModel(_ indexPath : IndexPath) -> ListableCellViewModel
+    func didSelectItem(at indexPath : IndexPath)
 }
 
 protocol ListableCellViewModel {

@@ -10,6 +10,7 @@ import Foundation
 
 class PhotoGalleryListViewModel : ViewModel, ListableViewModel {
     
+    
     private let cellViewModels = [PhotoCellViewModel("image1"),PhotoCellViewModel("image2"), PhotoCellViewModel("image3")]
     
     func cellViewModel(_ indexPath: IndexPath) -> ListableCellViewModel {
@@ -18,6 +19,10 @@ class PhotoGalleryListViewModel : ViewModel, ListableViewModel {
     
     func numberOfItems(_ section: Int) -> Int {
         return self.cellViewModels.count
+    }
+    
+    func didSelectItem(at indexPath: IndexPath) {
+        
     }
 
     

@@ -23,6 +23,7 @@
 		0F47B05D1DE64CD700D452D7 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F47B05C1DE64CD700D452D7 /* ViewModel.swift */; };
 		0F47B05F1DE64D8300D452D7 /* PhotoGalleryListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F47B05E1DE64D8300D452D7 /* PhotoGalleryListViewModel.swift */; };
 		0F47B0611DE64E1200D452D7 /* PhotoCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F47B0601DE64E1200D452D7 /* PhotoCellViewModel.swift */; };
+		0F47B0631DE6526700D452D7 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F47B0621DE6526700D452D7 /* Router.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,6 +66,7 @@
 		0F47B05C1DE64CD700D452D7 /* ViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		0F47B05E1DE64D8300D452D7 /* PhotoGalleryListViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoGalleryListViewModel.swift; sourceTree = "<group>"; };
 		0F47B0601DE64E1200D452D7 /* PhotoCellViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoCellViewModel.swift; sourceTree = "<group>"; };
+		0F47B0621DE6526700D452D7 /* Router.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -156,6 +158,7 @@
 				0F47B0591DE6481A00D452D7 /* PhotoCollectionViewCell.xib */,
 				0F47B05C1DE64CD700D452D7 /* ViewModel.swift */,
 				0F47B05E1DE64D8300D452D7 /* PhotoGalleryListViewModel.swift */,
+				0F47B0621DE6526700D452D7 /* Router.swift */,
 			);
 			path = PhotoGallery;
 			sourceTree = "<group>";
@@ -301,6 +304,7 @@
 			files = (
 				0F47B0611DE64E1200D452D7 /* PhotoCellViewModel.swift in Sources */,
 				0F47B0531DE61CBF00D452D7 /* PhotoGalleryListViewController.swift in Sources */,
+				0F47B0631DE6526700D452D7 /* Router.swift in Sources */,
 				0F47B04E1DE61B4200D452D7 /* ListableViewModel.swift in Sources */,
 				0F47B0211DE6191000D452D7 /* ViewController.swift in Sources */,
 				0F47B0571DE6462400D452D7 /* CollectionViewExtension.swift in Sources */,
