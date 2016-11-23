@@ -29,11 +29,17 @@ class PhotoGalleryListViewController: UIViewController {
     }
     
     private func setupCollectionView() {
-    
+        self.collectionView.dataSource = self
     }
 }
 
 extension PhotoGalleryListViewController : UICollectionViewDataSource {
     
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+    }
     
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return self.viewModel.numberOfItems(section)
+    }
 }

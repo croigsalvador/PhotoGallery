@@ -10,8 +10,9 @@ import Foundation
 import UIKit
 
 protocol ListableViewModel {
-    func numberOfItems(_ section : Int)
-    func cellViewModel(_ indexPath : IndexPath)
+    func numberOfItems(_ section : Int) -> Int
+    func cellViewModel(_ indexPath : IndexPath) -> ListableCellViewModel
+    func customLayout() -> UICollectionViewFlowLayout
 }
 
 protocol ListableCellViewModel {
