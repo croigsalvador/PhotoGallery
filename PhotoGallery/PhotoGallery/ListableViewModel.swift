@@ -16,6 +16,6 @@ protocol ListableViewModel {
 }
 
 protocol ListableCellViewModel {
-    func image() -> UIImage
+    func image(_ completion:(UIImage) -> Void)
     func size() -> CGSize
 }

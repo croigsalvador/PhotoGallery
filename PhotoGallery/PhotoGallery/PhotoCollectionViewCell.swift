@@ -8,14 +8,18 @@
 
 import UIKit
 
-class PhotoCollectionViewCell: UICollectionViewCell {
-
+class PhotoCollectionViewCell: UICollectionViewCell, NibLoadableView, ReusableView {
+    
     @IBOutlet private weak var photoImageView: UIImageView!
     @IBOutlet private weak var scrollView: UIScrollView!
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
+    override func prepareForReuse() {
+        self.photoImageView.image = nil
     }
-
+    
+    func configureCell(_ viewModel : ListableCellViewModel){
+        viewModel.image { (image) in
+            self.photoImageView.image = image
+        }
+    }
 }
