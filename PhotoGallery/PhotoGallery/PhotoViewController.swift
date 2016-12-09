@@ -13,6 +13,8 @@ class PhotoViewController: UIViewController {
     @IBOutlet fileprivate weak var collectionView: UICollectionView!
     fileprivate let viewModel : PhotoViewModel
     
+    var transitionManager = ImageTransitionManager()
+    
     init(_ viewModel : PhotoViewModel) {
         self.viewModel = viewModel
         super.init(nibName:"PhotoViewController", bundle: nil)
@@ -21,8 +23,15 @@ class PhotoViewController: UIViewController {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    func startPopTransition(){
+        _ = self.navigationController?.popViewController(animated: true)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.transitionManager.sourceViewController = self
+        self.navigationController?.delegate = self
         self.setupCollectionView()
     }
     
@@ -52,7 +61,16 @@ extension PhotoViewController : UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return self.collectionView.frame.size
     }
+}
+
+extension PhotoViewController : UINavigationControllerDelegate {
+    func navigationController(_ navigationController: UINavigationController, interactionControllerFor animationController: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
+        return transitionManager
+    }
     
+    func navigationController(_ navigationController: UINavigationController, animationControllerFor operation: UINavigationControllerOperation, from fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        return transitionManager
+    }
 }
 
 
