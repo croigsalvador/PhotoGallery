@@ -8,12 +8,12 @@
 
 import Foundation
 
-class PhotoGalleryListViewModel : ViewModel, ListableViewModel {
+class PhotoGalleryListViewModel : ViewModel {
     
     
-    private let cellViewModels = [PhotoCellViewModel("image1"),PhotoCellViewModel("image2"), PhotoCellViewModel("image3")]
+    private let cellViewModels = [PhotoGridCellViewModel("image1"),PhotoGridCellViewModel("image2"), PhotoGridCellViewModel("image3")]
     
-    func cellViewModel(_ indexPath: IndexPath) -> ListableCellViewModel {
+    func cellViewModel(_ indexPath: IndexPath) -> PhotoGridCellViewModel {
         return self.cellViewModels[indexPath.item]
     }
     

@@ -12,9 +12,9 @@ class PhotoGalleryListViewController: UIViewController {
     
     @IBOutlet private weak var collectionView: UICollectionView!
     
-    fileprivate let viewModel : ListableViewModel
+    fileprivate let viewModel : PhotoGalleryListViewModel
     
-    init(_ viewModel : ListableViewModel) {
+    init(_ viewModel : PhotoGalleryListViewModel) {
         self.viewModel = viewModel
         super.init(nibName:"PhotoGalleryListViewController", bundle: nil)
     }
@@ -31,14 +31,14 @@ class PhotoGalleryListViewController: UIViewController {
     private func setupCollectionView() {
         self.collectionView.dataSource = self
         self.collectionView.delegate = self
-        self.collectionView.register(PhotoCollectionViewCell.self)
+        self.collectionView.register(PhotoGridCollectionViewCell.self)
     }
 }
 
 extension PhotoGalleryListViewController : UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell: PhotoCollectionViewCell = collectionView.dequeueReusableCell(forIndexPath: indexPath)
+        let cell: PhotoGridCollectionViewCell = collectionView.dequeueReusableCell(forIndexPath: indexPath)
         let cellViewModel = self.viewModel.cellViewModel(indexPath)
         cell.configureCell(cellViewModel)
         

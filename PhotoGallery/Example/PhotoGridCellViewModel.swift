@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-struct PhotoCellViewModel : ListableCellViewModel {
+struct PhotoGridCellViewModel  {
     
     private let imageName : String
     

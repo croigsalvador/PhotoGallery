@@ -2,24 +2,23 @@
 //  PhotoCollectionViewCell.swift
 //  PhotoGallery
 //
-//  Created by Carlos Roig Salvador on 9/12/16.
+//  Created by Carlos Roig on 23/11/16.
 //  Copyright © 2016 minube. All rights reserved.
 //
 
 import UIKit
 
-class PhotoCollectionViewCell: UICollectionViewCell, NibLoadableView, ReusableView {
-
+class PhotoGridCollectionViewCell: UICollectionViewCell, NibLoadableView, ReusableView {
+    
     @IBOutlet private weak var photoImageView: UIImageView!
     
     override func prepareForReuse() {
-        super.prepareForReuse()
         self.photoImageView.image = nil
     }
-    func configure(_ viewModel : ImagePresentable) {
-        viewModel.image(frame.size) { (image) in
+    
+    func configureCell(_ viewModel : PhotoGridCellViewModel){
+        viewModel.image { (image) in
             self.photoImageView.image = image
         }
     }
-
 }
