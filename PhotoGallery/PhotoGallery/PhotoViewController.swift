@@ -10,9 +10,17 @@ import UIKit
 
 class PhotoViewController: UIViewController {
 
-    @IBOutlet private weak var collectionView: UICollectionView!
-    fileprivate let viewModel : PhotoViewModel = PhotoViewModel()
-
+    @IBOutlet fileprivate weak var collectionView: UICollectionView!
+    fileprivate let viewModel : PhotoViewModel
+    
+    init(_ viewModel : PhotoViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName:"PhotoViewController", bundle: nil)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setupCollectionView()
@@ -20,6 +28,7 @@ class PhotoViewController: UIViewController {
     
     private func setupCollectionView() {
         self.collectionView.dataSource = self
+        self.collectionView.delegate = self
         self.collectionView.register(PhotoCollectionViewCell.self)
     }
 }
@@ -38,4 +47,12 @@ extension PhotoViewController : UICollectionViewDataSource {
         return self.viewModel.numberOfItems(section)
     }
 }
+
+extension PhotoViewController : UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return self.collectionView.frame.size
+    }
+    
+}
+
 

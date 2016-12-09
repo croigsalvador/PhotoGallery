@@ -11,6 +11,7 @@ import UIKit
 class PhotoViewModel: NSObject {
     
     var images : [String]?
+    var selectedIndex : Int = 0
 
     func cellViewModel(_ indexPath: IndexPath) -> ImagePresentable {
         var cellViewModel = PhotoCellViewModel()

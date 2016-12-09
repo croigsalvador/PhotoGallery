@@ -10,20 +10,20 @@ import Foundation
 
 class PhotoGalleryListViewModel : ViewModel {
     
-    
-    private let cellViewModels = [PhotoGridCellViewModel("image1"),PhotoGridCellViewModel("image2"), PhotoGridCellViewModel("image3")]
+    private let images = ["image1","image2","image3"]
     
     func cellViewModel(_ indexPath: IndexPath) -> PhotoGridCellViewModel {
-        return self.cellViewModels[indexPath.item]
+        return PhotoGridCellViewModel(images[indexPath.item])
     }
     
     func numberOfItems(_ section: Int) -> Int {
-        return self.cellViewModels.count
-    }
-    
-    func didSelectItem(at indexPath: IndexPath) {
-        
+        return self.images.count
     }
 
-    
+    func photoViewModel(_ index: Int) -> PhotoViewModel {
+        let photoViewModel = PhotoViewModel()
+        photoViewModel.images = images
+        photoViewModel.selectedIndex = index
+        return photoViewModel
+    }
 }

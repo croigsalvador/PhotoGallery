@@ -27,13 +27,13 @@ struct PhotoCellViewModel : ImagePresentable {
 protocol ImagePresentable {
     var placeholder: String? {get}
     var imageURL: URL? {get}
-    var contentSize: UIViewContentMode {get}
+    var contentMode: UIViewContentMode {get}
     func image (_ size: CGSize,completion: @escaping (UIImage?)->())
 }
 
 extension ImagePresentable {
     var placeholder: String? {return nil}
-    var contentSize: UIViewContentMode {return .scaleAspectFit}
+    var contentMode: UIViewContentMode {return .scaleAspectFit}
     
     func image (_ size: CGSize,completion: @escaping (UIImage?)->()){
         SDWebImageManager.shared().downloadImage(with: self.imageURL, options:.retryFailed, progress: nil) { (image, error, cacheType, finished, imageURL) in

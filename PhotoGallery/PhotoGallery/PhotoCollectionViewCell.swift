@@ -20,6 +20,7 @@ class PhotoCollectionViewCell: UICollectionViewCell, NibLoadableView, ReusableVi
         viewModel.image(frame.size) { (image) in
             self.photoImageView.image = image
         }
+        self.photoImageView.contentMode = viewModel.contentMode
     }
 
 }
