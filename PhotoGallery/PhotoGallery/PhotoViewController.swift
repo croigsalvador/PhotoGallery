@@ -9,7 +9,7 @@
 import UIKit
 
 class PhotoViewController: UIViewController {
-
+    
     @IBOutlet fileprivate weak var collectionView: UICollectionView!
     fileprivate let viewModel : PhotoViewModel
     
@@ -26,6 +26,14 @@ class PhotoViewController: UIViewController {
     
     func startPopTransition(){
         _ = self.navigationController?.popViewController(animated: true)
+    }
+    
+    func selectedImageView() -> UIImageView? {
+        let visibleCells = self.collectionView.visibleCells
+        guard let cell = visibleCells.first as? PhotoCollectionViewCell else {
+            return nil
+        }
+        return cell.photoImageView
     }
     
     override func viewDidLoad() {
@@ -64,9 +72,9 @@ extension PhotoViewController : UICollectionViewDelegateFlowLayout {
 }
 
 extension PhotoViewController : UINavigationControllerDelegate {
-    func navigationController(_ navigationController: UINavigationController, interactionControllerFor animationController: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
-        return transitionManager
-    }
+//    func navigationController(_ navigationController: UINavigationController, interactionControllerFor animationController: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
+//        return transitionManager
+//    }
     
     func navigationController(_ navigationController: UINavigationController, animationControllerFor operation: UINavigationControllerOperation, from fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         return transitionManager

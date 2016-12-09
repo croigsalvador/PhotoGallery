@@ -10,7 +10,7 @@ import UIKit
 
 class PhotoCollectionViewCell: UICollectionViewCell, NibLoadableView, ReusableView {
 
-    @IBOutlet private weak var photoImageView: UIImageView!
+    @IBOutlet weak var photoImageView: UIImageView!
     
     override func prepareForReuse() {
         super.prepareForReuse()

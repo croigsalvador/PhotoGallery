@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ImageTransitionManager: UIPercentDrivenInteractiveTransition, UIViewControllerAnimatedTransitioning, UIViewControllerTransitioningDelegate  {
+class ImageTransitionManager: NSObject, UIViewControllerAnimatedTransitioning, UIViewControllerTransitioningDelegate  {
     
     private var presenting = false
     private var interactive = false
@@ -27,10 +27,6 @@ class ImageTransitionManager: UIPercentDrivenInteractiveTransition, UIViewContro
     func handleOnstagePan(_ pan: UIPanGestureRecognizer){
         
         let translation = pan.translation(in: pan.view!)
-        
-        print("Translation \(translation) in view \(pan.view!)")
-        
-//        let poistion =  translation.y / pan.view!.bounds.height * 0.5
         
         // now lets deal with different states that the gesture recognizer sends
         switch (pan.state) {
@@ -56,7 +52,52 @@ class ImageTransitionManager: UIPercentDrivenInteractiveTransition, UIViewContro
     }
     
     func updateImageTransition(_ translation: CGPoint) {
+        guard let imageView = self.sourceViewController.selectedImageView() else {
+            return
+        }
+        guard let startAnimationView = newAnimationView(imageView) else {
+            return
+        }
         
+        let imageViewFrame = self.sourceViewController.view.convert(imageView.frame, from:imageView)
+        
+        startAnimationView.frame = CGRect(x: 0, y: translation.y + imageViewFrame.origin.y, width: startAnimationView.frame.width, height: startAnimationView.frame.height)
+        
+        print("Translation \(translation) in viewFrame \(imageViewFrame), imageview : \(imageView)")
+        
+    }
+    
+    
+    func newAnimationView(_ view : UIView) -> UIView? {
+        
+        
+        var animationView : UIView? = nil
+        
+        if (view.layer.contents != nil) {
+            if view is UIImageView {
+                // The case of UIImageView is handled separately since the mere layer's contents (i.e. CGImage in this case) doesn't
+                // seem to contain proper informations about the image orientation for portrait images taken directly on the device.
+                // See https://github.com/NYTimes/NYTPhotoViewer/issues/115
+                let imageView = view as! UIImageView
+                animationView = UIImageView(image:imageView.image)
+                animationView?.bounds = view.bounds;
+            }
+            else {
+                animationView = UIView(frame:view.frame);
+                animationView?.layer.contents = view.layer.contents;
+                animationView?.layer.bounds = view.layer.bounds;
+            }
+            
+            animationView?.layer.cornerRadius = view.layer.cornerRadius;
+            animationView?.layer.masksToBounds = view.layer.masksToBounds;
+            animationView?.contentMode = view.contentMode;
+            animationView?.transform = view.transform;
+        }
+        else {
+            animationView = view.snapshotView(afterScreenUpdates: true)
+        }
+        
+        return animationView
     }
     
     // MARK: UIViewControllerAnimatedTransitioning protocol methods
@@ -65,7 +106,58 @@ class ImageTransitionManager: UIPercentDrivenInteractiveTransition, UIViewContro
     func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
         
         
+        guard let toView = transitionContext.view(forKey: UITransitionContextViewKey.to) ,
+            let toViewController = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.to),
+            let toScreenshot = captureScreenShot(view: toViewController.view),
+            let actualImageView = sourceViewController.selectedImageView(),
+            let actualImageScreenShot = captureScreenShot(view: actualImageView)
+            else {
+                transitionContext.completeTransition(false)
+                return
+        }
+        
+        
+        let container = transitionContext.containerView
+        container.addSubview(toView)
+        
+        container.addSubview(toScreenshot)
+        container.addSubview(actualImageScreenShot)
+        
+        var imageFinalFrame = actualImageScreenShot.frame
+        imageFinalFrame.origin.y = actualImageScreenShot.frame.size.height
+        
+        sourceViewController.view.alpha = 0.0;
+        toView.alpha = 0.0
+        toScreenshot.alpha = 0.0
+        UIView.animate(withDuration: 0.5, animations: {
+            actualImageScreenShot.frame = imageFinalFrame
+            toScreenshot.alpha = 1.0
+            toView.alpha = 1.0;
+        }) { (finished) in
+            toScreenshot.removeFromSuperview()
+            actualImageScreenShot.removeFromSuperview()
+            toView.alpha = 1.0;
+            transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
+        }
     }
+    
+    func captureScreenShot(view: UIView) -> UIImageView? {
+        defer {
+            UIGraphicsEndImageContext()
+        }
+        //Force render to get correct nib size from the view.
+        UIGraphicsBeginImageContextWithOptions(view.frame.size, true, UIScreen.main.scale)
+        view.layer.render(in: UIGraphicsGetCurrentContext()!)
+        UIGraphicsEndImageContext()
+        
+        UIGraphicsBeginImageContextWithOptions(view.frame.size, true, UIScreen.main.scale)
+        view.layer.render(in: UIGraphicsGetCurrentContext()!)
+        guard let image = UIGraphicsGetImageFromCurrentImageContext() else {
+            return nil
+        }
+        return UIImageView(image: image)
+    }
+    
     
     // return how many seconds the transiton animation will take
     func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
@@ -84,13 +176,13 @@ class ImageTransitionManager: UIPercentDrivenInteractiveTransition, UIViewContro
         return self
     }
     
-    func interactionControllerForPresentation(using animator: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
-        return self.interactive ? self : nil
-    }
-    
-    func interactionControllerForDismissal(using animator: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
-        return self.interactive ? self : nil
-    }
+    //    func interactionControllerForPresentation(using animator: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
+    //        return self.interactive ? self : nil
+    //    }
+    //
+    //    func interactionControllerForDismissal(using animator: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
+    //        return self.interactive ? self : nil
+    //    }
     
 }
 
