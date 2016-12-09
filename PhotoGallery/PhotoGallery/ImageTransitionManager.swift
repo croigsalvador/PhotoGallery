@@ -67,7 +67,6 @@ class ImageTransitionManager: NSObject, UIViewControllerAnimatedTransitioning, U
         
     }
     
-    
     func newAnimationView(_ view : UIView) -> UIView? {
         
         
@@ -110,21 +109,22 @@ class ImageTransitionManager: NSObject, UIViewControllerAnimatedTransitioning, U
             let toViewController = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.to),
             let toScreenshot = captureScreenShot(view: toViewController.view),
             let actualImageView = sourceViewController.selectedImageView(),
-            let actualImageScreenShot = captureScreenShot(view: actualImageView)
+            let actualImageScreenShot = snapshot(of: frame(for: actualImageView.image!, inAspectFit:actualImageView.frame), in: actualImageView)
             else {
                 transitionContext.completeTransition(false)
                 return
         }
         
-        
         let container = transitionContext.containerView
         container.addSubview(toView)
         
         container.addSubview(toScreenshot)
+    
+        actualImageScreenShot.frame =  frame(for: actualImageView.image!, inAspectFit:actualImageView.frame)
         container.addSubview(actualImageScreenShot)
         
         var imageFinalFrame = actualImageScreenShot.frame
-        imageFinalFrame.origin.y = actualImageScreenShot.frame.size.height
+        imageFinalFrame.origin.y = toView.frame.size.height
         
         sourceViewController.view.alpha = 0.0;
         toView.alpha = 0.0
@@ -156,6 +156,50 @@ class ImageTransitionManager: NSObject, UIViewControllerAnimatedTransitioning, U
             return nil
         }
         return UIImageView(image: image)
+    }
+    
+    func snapshot(of rect: CGRect, in view: UIView) -> UIImageView? {
+        // snapshot entire view
+        
+        UIGraphicsBeginImageContextWithOptions(view.frame.size, true, 0)
+        view.layer.render(in: UIGraphicsGetCurrentContext()!)
+        let wholeImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        // if no `rect` provided, return image of whole view
+        
+        guard let image = wholeImage else { return nil }
+        
+        // otherwise, grab specified `rect` of image
+        
+        let scale = image.scale
+        let scaledRect = CGRect(x: rect.origin.x * scale, y: rect.origin.y * scale, width: rect.size.width * scale, height: rect.size.height * scale)
+        guard let cgImage = image.cgImage?.cropping(to: scaledRect) else { return nil }
+        return UIImageView(image:UIImage(cgImage: cgImage, scale: scale, orientation: .up))
+    }
+
+    
+    func frame(for image: UIImage, inAspectFit frame: CGRect) -> CGRect {
+        let imageRatio = image.size.width / image.size.height;
+        
+        let viewRatio = frame.size.width / frame.size.height;
+        
+        if imageRatio < viewRatio {
+            let scale = frame.size.height / image.size.height;
+            
+            let width = scale * image.size.width;
+            
+            let topLeftX = (frame.size.width - width) * 0.5;
+            
+            return CGRect(x:topLeftX, y:0, width:width, height:frame.size.height);
+        } else {
+            let scale = frame.size.width / image.size.width;
+            
+            let height = scale * image.size.height;
+            
+            let topLeftY = (frame.size.height - height) * 0.5;
+            return CGRect(x:0, y:topLeftY, width:frame.size.width, height:height);
+        }
     }
     
     
